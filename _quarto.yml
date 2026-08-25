@@ -8,7 +8,7 @@ website:
   search: true
   contents:
     - text: "Home"
-     href:index.qmd
+    href:index.qmd
     - section: "Tall og tekster" 
     contents:
     - periode-1/uke34.qmd
