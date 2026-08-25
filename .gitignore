@@ -1,2 +1,11 @@
-/.quarto/
+
 **/*.quarto_ipynb
+
+# Quarto build output & cache
+/.quarto/
+/_site/
+/_freeze/
+
+# OS-spesifikke filer
+.DS_Store
+Thumbs.db
