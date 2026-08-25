@@ -24,3 +24,5 @@ format:
       - brand
     css: styles.css
     toc: true
+    highlight-style: github # Gir pen fargekoding på koden
+    code-copy: true # Legger til en "Kopier"-knapp på kodeblokkene
