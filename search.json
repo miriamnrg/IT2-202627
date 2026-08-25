@@ -26,7 +26,7 @@
     "href": "periode-1/if-tester.html",
     "title": "Sammenligning av datatyper",
     "section": "",
-    "text": "Kjør programmet nedenfor, enten ved å kopiere koden over i en editor eller ved å kjøre den i PythonTutor.\nNår du (som bruker) bes om å taste inn de to tallene, skriv henholdsvis 11 og 7.\nEr det som skrives ut overraskende?\n#| eval: false\ntall1 = input(“Skriv et tall:”) tall2 = input(“Skriv et annet tall:”)\nif tall1 &gt; tall2: print(tall1 + ” er størst!“) else: print(tall2 +” er størst!“)",
+    "text": "Kjør programmet nedenfor, enten ved å kopiere koden over i en editor eller ved å kjøre den i PythonTutor.\nNår du (som bruker) bes om å taste inn de to tallene, skriv henholdsvis 11 og 7.\nEr det som skrives ut overraskende?\n\ntall1 = input(\"Skriv et tall: \")\ntall2 = input(\"Skriv et annet tall: \")\n\nif tall1 &gt; tall2:\n    print(tall1 + \" er størst!\")\nelse:\n    print(tall2 + \" er størst!\")",
     "crumbs": [
       "Valg og betingelser",
       "Sammenligning av datatyper"
@@ -37,7 +37,7 @@
     "href": "periode-1/if-tester.html#oppgave-a",
     "title": "Sammenligning av datatyper",
     "section": "",
-    "text": "Kjør programmet nedenfor, enten ved å kopiere koden over i en editor eller ved å kjøre den i PythonTutor.\nNår du (som bruker) bes om å taste inn de to tallene, skriv henholdsvis 11 og 7.\nEr det som skrives ut overraskende?\n#| eval: false\ntall1 = input(“Skriv et tall:”) tall2 = input(“Skriv et annet tall:”)\nif tall1 &gt; tall2: print(tall1 + ” er størst!“) else: print(tall2 +” er størst!“)",
+    "text": "Kjør programmet nedenfor, enten ved å kopiere koden over i en editor eller ved å kjøre den i PythonTutor.\nNår du (som bruker) bes om å taste inn de to tallene, skriv henholdsvis 11 og 7.\nEr det som skrives ut overraskende?\n\ntall1 = input(\"Skriv et tall: \")\ntall2 = input(\"Skriv et annet tall: \")\n\nif tall1 &gt; tall2:\n    print(tall1 + \" er størst!\")\nelse:\n    print(tall2 + \" er størst!\")",
     "crumbs": [
       "Valg og betingelser",
       "Sammenligning av datatyper"
