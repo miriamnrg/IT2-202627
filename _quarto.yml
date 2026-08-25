@@ -4,18 +4,18 @@ project:
 website:
   title: "Periode-1 Python"
   sidebar:
-  style: "docked"
-  search: true
-  contents:
-    - text: "Home"
-    href:index.qmd
-    - section: "Tall og tekster" 
+    style: "docked"
+    search: true
     contents:
-    - periode-1/uke34.qmd
-    - periode-1/uke35.qmd 
-    - section: "Valg og betingelser"
-    contents:
-    - periode-1/if-tester.qmd
+      - text: "Home"
+        href: index.qmd
+      - section: "Tall og tekster"
+        contents:
+          - periode-1/uke34.qmd
+          - periode-1/uke35.qmd
+      - section: "Valg og betingelser"
+        contents:
+          - periode-1/if-tester.qmd
 
 format:
   html:
