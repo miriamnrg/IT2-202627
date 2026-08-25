@@ -4,7 +4,7 @@ project:
 website:
   title: "Periode-1 Python"
   sidebar:
-  style:"docked"
+  style: "docked"
   search: true
   contents:
     - text: "Home"
