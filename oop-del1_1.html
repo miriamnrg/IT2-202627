@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OOP Python – Del 1</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#1b1f2a;--muted:#5d6577;--line:#e2e5ee;--accent:#5b5bf0;--accent2:#2bb673;--bad:#e5484d;--code:#12141c;--codetx:#e6e9f5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1117;--card:#181b25;--text:#eceef6;--muted:#9aa2b6;--line:#272b39;--accent:#8c8cff;--accent2:#43d08a;--bad:#ff6b70;--code:#0a0b10}}
+:root[data-theme="dark"]{--bg:#0f1117;--card:#181b25;--text:#eceef6;--muted:#9aa2b6;--line:#272b39;--accent:#8c8cff;--accent2:#43d08a;--bad:#ff6b70;--code:#0a0b10}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
+aside{background:var(--card);border-right:1px solid var(--line);padding:20px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+h1{font-size:18px;margin:0 6px 4px}.sub{color:var(--muted);font-size:13px;margin:0 6px 16px}
+.xp{margin:0 6px 16px;font-size:13px;color:var(--muted)}.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .4s}
+nav button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;color:var(--text);padding:10px;border-radius:10px;font:inherit;cursor:pointer}
+nav button:hover{background:var(--bg)}nav button.on{background:var(--bg);box-shadow:inset 3px 0 0 var(--accent);font-weight:600}
+.dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;flex:none}.done .dot{background:var(--accent2);border-color:var(--accent2);color:#fff}
+main{padding:32px clamp(16px,4vw,48px);max-width:860px;width:100%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:20px}
+h2{margin:0 0 6px;font-size:26px}h3{margin:0 0 10px;font-size:17px}.tag{display:inline-block;font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+pre,textarea{background:var(--code);color:var(--codetx);border-radius:12px;padding:14px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto;margin:12px 0}
+textarea{width:100%;min-height:190px;border:1px solid var(--line);resize:vertical;tab-size:4}
+code{background:var(--bg);padding:1px 6px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:.9em}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;font:inherit;cursor:pointer}
+.opt:hover{border-color:var(--accent)}.opt.ok{border-color:var(--accent2);background:color-mix(in srgb,var(--accent2) 14%,transparent)}.opt.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;margin:4px 8px 4px 0}.btn.alt{background:var(--bg);color:var(--text);border:1px solid var(--line)}
+.fb{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:15px}.fb.ok{background:color-mix(in srgb,var(--accent2) 16%,transparent)}.fb.no{background:color-mix(in srgb,var(--bad) 13%,transparent)}
+.muted{color:var(--muted)}a{color:var(--accent)}
+.def{border-left:4px solid var(--accent);background:var(--bg);padding:12px 16px;border-radius:0 12px 12px 0;margin:4px 0 14px}
+.pil{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.pil>div{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg)}
+.pil h4{margin:0 0 2px;font-size:16px}.pil .en{color:var(--muted);font-size:12px;margin-bottom:8px}
+.pil p{margin:0 0 8px;font-size:14.5px}.pil .goal{font-size:14px;border-top:1px dashed var(--line);padding-top:8px;margin:0}
+.pil .goal b{color:var(--accent2)}
+@media (max-width:760px){.app{grid-template-columns:1fr}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}nav{display:grid;grid-template-columns:1fr 1fr}.pil{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+<h1>🐍 OOP med Python</h1>
+<p class="sub">IT2 · objektorientert programmering · Del 1 av 2</p>
+<div class="xp"><span id="xp">0 XP</span> · <span id="pc">0 av 4 moduler</span><div class="bar"><i id="pb"></i></div></div>
+<nav id="nav"></nav>
+<button class="btn alt" style="margin:14px 6px 0" id="reset">Nullstill fremdrift</button>
+</aside>
+<main id="main"></main>
+</div>
+<script>
+const ALL=[
+{t:"Klasser og objekter",intro:`<div class="def"><b>Definisjon:</b> Objektorientert programmering (OOP) er et <b>programmeringsparadigme</b>, altså en måte å tenke og strukturere programmer på. Programmet bygges som en samling <b>objekter</b> som samarbeider. Hvert objekt samler <b>data</b> (attributter) og <b>oppførsel</b> (metoder) som hører sammen. Objektene lages ut fra <b>klasser</b>, som fungerer som maler eller oppskrifter.</div>
+<p>OOP er et verktøy for å modellere ting fra den virkelige verden – en person, en film – og for å strukturere programmene våre med klasser og objekter. Andre paradigmer er for eksempel prosedyrisk og funksjonell programmering.</p>
+<p>En <b>klasse</b> er tegningen. Et <b>objekt</b> er en <b>instans</b> av klassen.</p>`,
+extra:`<div class="card"><span class="tag">De tre pilarene i OOP</span><h3>Hva prøver vi å oppnå?</h3>
+<p class="muted" style="margin:0">Tre idéer går igjen i all objektorientert programmering. Du skal jobbe mer med hver av dem senere i kurset.</p>
+<div class="pil">
+<div><h4>🔒 Innkapsling</h4><div class="en">Encapsulation</div><p>Vi samler data og metodene som bruker dataene i én klasse, og skjuler de indre detaljene. Resten av programmet bruker objektet gjennom metodene.</p><p class="goal"><b>Mål:</b> beskytte data mot feil bruk, og kunne endre koden inne i klassen uten at resten av programmet påvirkes.</p></div>
+<div><h4>🧬 Arv</h4><div class="en">Inheritance</div><p>En ny klasse (subklasse) bygger på en eksisterende klasse (superklasse) og får alle attributtene og metodene. Den kan legge til egne eller endre dem.</p><p class="goal"><b>Mål:</b> gjenbruke kode i stedet for å kopiere den, og modellere «er en»-forhold: en <code>Laerer</code> <i>er en</i> <code>Person</code>.</p></div>
+<div><h4>🎭 Polymorfisme</h4><div class="en">Polymorphism</div><p>«Mange former»: samme metodenavn kan oppføre seg forskjellig avhengig av hvilken klasse objektet tilhører.</p><p class="goal"><b>Mål:</b> skrive generell kode som fungerer for mange typer objekter, uten å sjekke typen med <code>if</code>.</p></div>
+</div>
+<p style="margin:16px 0 0"><b>Polymorfisme i praksis</b> – samme kall, ulik oppførsel:</p>
+<pre>class Elev(Person):
+    def presenter(self):
+        return f"Hei, jeg heter {self.navn} og går på IT2."
+
+class Laerer(Person):
+    def presenter(self):
+        return f"Hei, jeg heter {self.navn} og underviser i IT2."
+
+for p in [Elev("Ola"), Laerer("Miriam")]:
+    print(p.presenter())</pre>
+<p class="muted" style="font-size:14px;margin:0">I Python markerer vi «private» variabler med <code>_navn</code> eller <code>__navn</code>. Det er en avtale mellom programmerere, ikke en sperre. Noen lærebøker regner også <b>abstraksjon</b> som en fjerde pilar.</p></div>`,
+note:"Syntaksen for klasser (<code>class</code>, <code>__init__</code> og <code>self</code>) kan se uvant ut nå. Vi skal se nærmere på den i detalj senere, i de neste modulene.",
+code:`class Person:\n    def __init__(self, fornavn, etternavn):\n        self.fornavn = fornavn\n        self.etternavn = etternavn\n\np1 = Person("Ola", "Nordmann")\np2 = Person("Kari", "Nordmann")`,
+q:{q:"Hva er forholdet mellom klassen Person og p1?",o:["p1 er en instans av klassen Person","p1 er en funksjon i Person","Person er en instans av p1","De er to ulike klasser"],a:0,e:"Klassen er malen, og hvert objekt vi lager fra den er en instans."},
+ex:{task:"Lag en klasse <code>Person</code> med <code>__init__</code> som tar inn <code>fornavn</code>, <code>etternavn</code>, <code>alder</code> og <code>jobb</code> og lagrer dem som medlemsvariabler.",start:"class Person:\n    ",
+checks:[[/class\s+Person/,"Husk å starte med class Person."],[/def\s+__init__\s*\(\s*self\s*,[^)]*fornavn[^)]*etternavn[^)]*alder[^)]*jobb/,"__init__ må ta self, fornavn, etternavn, alder og jobb."],[/self\.fornavn\s*=/,"Lagre self.fornavn = fornavn."],[/self\.etternavn\s*=/,"Lagre self.etternavn."],[/self\.alder\s*=/,"Lagre self.alder."],[/self\.jobb\s*=/,"Lagre self.jobb."]],
+sol:"class Person:\n    def __init__(self, fornavn, etternavn, alder, jobb):\n        self.fornavn = fornavn\n        self.etternavn = etternavn\n        self.alder = alder\n        self.jobb = jobb"}},
+{t:"Medlemsvariabler",intro:`<h3 style="margin-top:0">Steg 1: Definer medlemsvariabler i klassen</h3>
+<p>Variabler som tilhører et objekt kalles <b>medlemsvariabler</b> (også kalt attributter eller instansvariabler). Vi definerer dem inne i <code>__init__</code> ved å skrive <code>self.</code> foran variabelnavnet:</p>
+<pre>class Person:
+    def __init__(self, fornavn, etternavn):
+        self.fornavn = fornavn        # medlemsvariabel
+        self.etternavn = etternavn    # medlemsvariabel</pre>
+<p>Linjen <code>self.fornavn = fornavn</code> har to deler: <code>self.fornavn</code> til venstre er medlemsvariabelen som lagres i objektet, og <code>fornavn</code> til høyre er parameteren vi sendte inn. Uten <code>self.</code> ville <code>fornavn</code> bare vært en vanlig lokal variabel som forsvinner når <code>__init__</code> er ferdig.</p>
+<div class="def"><b>Hva er self?</b> <code>self</code> er en referanse til objektet som lages eller brukes akkurat nå. Når vi skriver <code>p1 = Person("Ola", "Nordmann")</code>, sender Python automatisk <code>p1</code> inn som <code>self</code>. Da betyr <code>self.fornavn = fornavn</code> at <code>p1</code> får sin egen variabel <code>fornavn</code>. For <code>p2</code> er <code>self</code> i stedet <code>p2</code>, og derfor får hvert objekt sine egne verdier. <code>self</code> må stå som første parameter i <code>__init__</code> og alle metoder, men vi skriver ikke noe for den når vi lager objektet.</div>
+<h3>Steg 2: Bruk medlemsvariablene</h3>
+<p>Når objektet er laget, når vi variablene utenfra med <b>objekt + punktum</b>. Hvert objekt har sine egne verdier, så en endring i <code>p1</code> påvirker ikke <code>p2</code>. Et objekt som bare har attributter ligner på en liste eller en ordbok.</p>`,
+code:`p1 = Person("Ola", "Nordmann")\nprint(p1.fornavn)   # Ola\np1.fornavn = "Per"  # endrer bare p1\nprint(p2.fornavn)   # Kari (uendret)`,
+q:{q:"Hvordan skriver du ut etternavnet til objektet p2?",o:["print(p2.etternavn)","print(etternavn.p2)","print(Person.p2)","print(p2[etternavn])"],a:0,e:"Objekt, punktum, variabelnavn: p2.etternavn."},
+ex:{task:"Anta at klassen <code>Person</code> finnes. Lag et objekt <code>p</code> med verdiene Miriam, Castillo, 59, lærer, og skriv ut alle fire medlemsvariablene med <code>print</code>.",start:"p = ",
+checks:[[/p\s*=\s*Person\s*\(/,"Lag objektet med p = Person(...)."],[/print\s*\(\s*p\.fornavn/,"Skriv ut p.fornavn."],[/print\s*\(\s*p\.etternavn/,"Skriv ut p.etternavn."],[/print\s*\(\s*p\.alder/,"Skriv ut p.alder."],[/print\s*\(\s*p\.jobb/,"Skriv ut p.jobb."]],
+sol:'p = Person("Miriam", "Castillo", 59, "lærer")\nprint(p.fornavn)\nprint(p.etternavn)\nprint(p.alder)\nprint(p.jobb)'}},
+{t:"Metoder og self",intro:`<div class="def"><b>Mål med metoder:</b> En metode er en funksjon som hører til en klasse. Medlemsvariablene er <i>dataene</i> objektet har, og metodene beskriver hva objektet kan <i>gjøre</i> med dataene. Når data og funksjoner som hører sammen ligger i samme klasse, blir koden lettere å finne, forstå og gjenbruke.</div>
+<h3>Hvorfor innkapsling?</h3>
+<p>Dette er ideen om <b>innkapsling</b> fra modul 1: dataene og metodene som bruker dem samles i én klasse. Resten av programmet bruker objektet gjennom metodene i stedet for å jobbe direkte med variablene inne i det. Det gir oss tre fordeler:</p>
+<ul>
+<li><b>Samlet:</b> alt som hører til en <code>Person</code> ligger i klassen <code>Person</code>.</li>
+<li><b>Beskyttet:</b> andre deler av programmet trenger ikke vite hvordan dataene er lagret, bare hvilke metoder de kan kalle.</li>
+<li><b>Lett å endre:</b> vi kan forbedre koden inne i en metode uten at resten av programmet må endres.</li>
+</ul>
+<pre># Uten metode: hver bruker må sette sammen navnet selv
+print(p1.fornavn + " " + p1.etternavn)
+
+# Med metode: logikken ligger i klassen, og alle bruker den samme måten
+print(p1.fullnavn())</pre>
+<h3>Slik lager du en metode</h3>
+<p>Metoder skrives som funksjoner inne i klassen. De <b>må</b> ta inn parameteren <code>self</code>, som peker på det bestemte objektet metoden kalles på. Vi kaller dem via objekt + punktum, og da sender Python <code>self</code> for oss.</p>`,
+code:`class Person:\n    def __init__(self, navn):\n        self.navn = navn\n\n    def hils(self, mottaker):\n        print("Hei", mottaker)\n\nola = Person("Ola")\nola.hils("Kari")   # Hei Kari`,
+q:{q:"Hvorfor må en metode ha self som første parameter?",o:["self peker på objektet metoden kalles på","self er et reservert navn for tall","Det er bare pynt","self gjør metoden privat"],a:0,e:"Via self får metoden tilgang til akkurat dette objektets variabler."},
+ex:{task:"Gi <code>Person</code> en metode <code>hils(self, mottaker)</code> som skriver ut «Hei» og mottakerens navn.",start:"class Person:\n    def __init__(self, fornavn):\n        self.fornavn = fornavn\n\n    ",
+checks:[[/def\s+hils\s*\(\s*self\s*,\s*mottaker\s*\)/,"Definer def hils(self, mottaker)."],[/print\s*\([^)]*Hei[^)]*mottaker/,"Skriv ut Hei og mottaker."]],
+sol:'class Person:\n    def __init__(self, fornavn):\n        self.fornavn = fornavn\n\n    def hils(self, mottaker):\n        print("Hei", mottaker)'}},
+{t:"Magiske metoder",intro:`<h3 style="margin-top:0">Du har brukt __init__ allerede</h3>
+<p>Til nå har vi brukt <code>__init__</code> i alle klassene våre. Den kalles en <b>konstruktør</b>, og den kjører automatisk hver gang et objekt (en instans) opprettes ut fra en klasse. Der setter vi startverdiene til objektet:</p>
+<pre>class Person:
+    def __init__(self, fornavn):   # konstruktøren
+        self.fornavn = fornavn
+
+p1 = Person("Ola")   # her kalles __init__ automatisk</pre>
+<p>Vi skriver aldri <code>p1.__init__(...)</code> selv. Linjen <code>Person("Ola")</code> oppretter objektet, og Python kaller <code>__init__</code> for oss.</p>
+<h3>Dunder-metoder</h3>
+<p>Konstruktøren er et eksempel på en <b>magisk metode</b>, også kalt <b>dunder-metode</b> (fra «double underscore»): metoder med doble understreker foran og bak navnet. De er ikke ment å kalles direkte. Python bruker dem automatisk i bestemte situasjoner: <code>__init__</code> når et objekt lages, og <code>__str__</code> når objektet skrives ut. Uten <code>__str__</code> får du bare en kryptisk minneadresse.</p>`,
+code:`class Person:\n    def __init__(self, navn):\n        self.navn = navn\n\n    def __str__(self):\n        return "Person: " + self.navn\n\nprint(Person("Ola"))   # Person: Ola`,
+after:`<div class="card" style="border-color:var(--accent)"><span class="tag">Før du går videre til arv</span><h3>📁 Jobb med oppgaven til mappevurdering</h3>
+<p>Nå har du lært det viktigste for å lage egne klasser. Før du starter på neste modul, skal du jobbe med oppgaven som skal leveres til mappevurdering. Du kan bruke alt du har lært så langt:</p>
+<ul>
+<li>klasser og objekter</li>
+<li>medlemsvariabler med <code>self</code></li>
+<li>metoder</li>
+<li>konstruktøren <code>__init__</code> og <code>__str__</code></li>
+</ul>
+<p class="muted" style="margin-bottom:0">Test koden din i VS Code underveis, og spør læreren hvis du står fast.</p></div>`,
+q:{q:"Hva skjer når du kjører print(objekt) og klassen har __str__?",o:["Python bruker teksten __str__ returnerer","Programmet krasjer","Du må kalle objekt.__str__() selv","Ingenting skrives ut"],a:0,e:"Python kaller __str__ automatisk, og den skal returnere en streng."},
+ex:{task:"Lag <code>__str__</code> som <b>returnerer</b> (ikke printer) teksten «fornavn etternavn». Lag deretter et <code>Person</code>-objekt og <b>print objektet</b> med <code>print(...)</code> for å se at <code>__str__</code> blir brukt.",start:"class Person:\n    def __init__(self, fornavn, etternavn):\n        self.fornavn = fornavn\n        self.etternavn = etternavn\n\n    ",
+checks:[[/def\s+__str__\s*\(\s*self\s*\)/,"Definer def __str__(self)."],[/return\s+[^\n]*fornavn[^\n]*etternavn|return\s+f["'][^\n]*fornavn[^\n]*etternavn/,"Returner fornavn og etternavn med return."],[/\b\w+\s*=\s*Person\s*\(/,"Lag et objekt etter klassen, for eksempel p = Person(\"Ola\", \"Nordmann\")."],[/print\s*\(\s*[A-Za-z_]\w*\s*\)/,"Print selve objektet med print(p), uten .fornavn og uten å kalle __str__() selv."]],
+sol:"class Person:\n    def __init__(self, fornavn, etternavn):\n        self.fornavn = fornavn\n        self.etternavn = etternavn\n\n    def __str__(self):\n        return self.fornavn + \" \" + self.etternavn\n\np = Person(\"Ola\", \"Nordmann\")\nprint(p)   # Ola Nordmann"}},
+{t:"Arv",intro:`Rektor, rådgiver, lærer og elev er alle personer og har mye felles. I stedet for én stor klasse lager vi én klasse for det de har felles, og nye klasser basert på den. Dette kalles <b>arv</b>. Barneklassen må kalle konstruktøren til foreldreklassen med <code>super()</code>.`,
+code:`class Laerer(Person):\n    def __init__(self, fornavn, etternavn, skole):\n        super().__init__(fornavn, etternavn)\n        self.skole = skole`,
+q:{q:"Hva gjør super().__init__(...) i Laerer?",o:["Kjører Person sin __init__ så fornavn og etternavn settes","Sletter Person-klassen","Lager en ny Person","Gjør klassen privat"],a:0,e:"super() gir tilgang til foreldreklassen, så vi slipper å skrive koden på nytt."},
+ex:{task:"Lag klassen <code>Laerer</code> som arver fra <code>Person</code>, tar inn <code>fornavn</code>, <code>etternavn</code> og <code>skole</code>, og bruker <code>super()</code>.",start:"class Laerer(Person):\n    ",
+checks:[[/class\s+Laerer\s*\(\s*Person\s*\)/,"Klassen må arve: class Laerer(Person)."],[/def\s+__init__\s*\(\s*self\s*,[^)]*skole/,"__init__ må ta skole i tillegg."],[/super\s*\(\s*\)\s*\.__init__\s*\(/,"Kall super().__init__(...)."],[/self\.skole\s*=/,"Lagre self.skole."]],
+sol:"class Laerer(Person):\n    def __init__(self, fornavn, etternavn, skole):\n        super().__init__(fornavn, etternavn)\n        self.skole = skole"}},
+{t:"Oppgave: Arbeidssted",intro:`Nå samler vi alt. Et <b>Arbeidssted</b> har et navn og en liste <code>ansatte</code> med Person-objekter, som er tom i starten. Det skal kunne ansette og avslutte ansatte. I VS Code kan du kjøre testene fra <code>main()</code> i oppgavefilen din.`,
+code:`arbeidssted = Arbeidssted("Akademiet")\narbeidssted.ansett(ansatt)\narbeidssted.slutt("Miriam", "Castillo")`,
+q:{q:"Hvilken liste-metode passer for å legge til en ansatt?",o:["append","remove","sort","len"],a:0,e:"append legger til sist i listen, remove fjerner et element."},
+ex:{task:"Lag <code>Arbeidssted</code> med <code>__init__(self, navn)</code> og tom liste <code>ansatte</code>, <code>ansett(self, person)</code> og <code>slutt(self, fornavn, etternavn)</code> som fjerner personen med dette navnet.",start:"class Arbeidssted:\n    ",
+checks:[[/class\s+Arbeidssted/,"Lag class Arbeidssted."],[/self\.ansatte\s*=\s*\[\s*\]/,"Start med self.ansatte = []."],[/def\s+ansett\s*\(\s*self\s*,\s*person/,"Definer ansett(self, person)."],[/self\.ansatte\.append\s*\(/,"Bruk self.ansatte.append(person)."],[/def\s+slutt\s*\(\s*self\s*,\s*fornavn\s*,\s*etternavn/,"Definer slutt(self, fornavn, etternavn)."],[/\.remove\s*\(/,"Bruk remove for å fjerne personen."]],
+sol:"class Arbeidssted:\n    def __init__(self, navn):\n        self.navn = navn\n        self.ansatte = []\n\n    def ansett(self, person):\n        self.ansatte.append(person)\n\n    def slutt(self, fornavn, etternavn):\n        for p in self.ansatte:\n            if p.fornavn == fornavn and p.etternavn == etternavn:\n                self.ansatte.remove(p)\n                break"}}
+];
+const PART=1,OFF=0;const L=ALL.slice(0,4);
+const PIL=[
+{q:"Hvilke tre pilarer er hovedideene i OOP?",o:["Klasse, objekt og funksjon","Løkker, betingelser og lister","Innkapsling, arv og polymorfisme","Input, output og variabler"],a:2,e:"De tre pilarene er innkapsling, arv og polymorfisme.",h:"Pilarene er prinsipper for hvordan vi designer klasser, ikke vanlige Python-byggeklosser."},
+{q:"Klassen BankKonto har self._saldo, og bare metodene innskudd() og uttak() skal endre saldoen. Hvilken pilar er dette?",o:["Innkapsling","Polymorfisme","Arv"],a:0,e:"Innkapsling betyr at data og metoder ligger samlet i klassen, og at dataene beskyttes mot at hvem som helst endrer dem direkte. I Python markerer vi det med en understrek, som self._saldo.",h:"Tenk på at dataene beskyttes inne i klassen."},
+{q:"class Elev(Person) gjenbruker fornavn og etternavn fra Person. Hvilken pilar er dette?",o:["Innkapsling","Polymorfisme","Arv"],a:2,e:"Arv lar en ny klasse få alt fra en eksisterende klasse, slik at vi slipper å skrive koden på nytt.",h:"Elev bygger videre på en klasse som allerede finnes."},
+{q:"Elev og Laerer har begge en metode presenter(), men gir ulik tekst. Python kjører riktig versjon ut fra hvilket objekt det er. Hva kalles dette?",o:["Innkapsling","Polymorfisme","Arv"],a:1,e:"Polymorfisme betyr «mange former»: samme metodenavn, men ulik oppførsel i ulike klasser.",h:"Samme metodenavn, ulik oppførsel."},
+{q:"Hvilket av disse forholdene passer best for arv?",o:["En Bil har en Motor","En Laerer er en Person","En Elev bruker en Printer","En Skole har mange Rom"],a:1,e:"Arv modellerer «er en»-forhold. «Har en»-forhold løses ved at ett objekt inneholder et annet.",h:"Spør deg selv: «Er X en Y?»"}
+];
+const BUG=[
+{q:"Feil i definisjonen av medlemsvariabler",code:"class Person:\n    def __init__(self, fornavn, etternavn):\n        fornavn = fornavn\n        etternavn = etternavn\n\np1 = Person(\"Ola\", \"Nordmann\")\nprint(p1.fornavn)",err:"AttributeError: 'Person' object has no attribute 'fornavn'",
+o:[["<code>self</code> skal fjernes som første parameter i <code>__init__</code>","Nei, <code>self</code> må stå som første parameter i <code>__init__</code> og alle andre metoder. Det er den som gjør at metoden vet hvilket objekt den jobber med."],["<code>print</code> må skrive <code>Person.fornavn</code> i stedet for <code>p1.fornavn</code>","<code>Person</code> er klassen, ikke objektet. Medlemsvariabler hører til hvert enkelt objekt, så <code>p1.fornavn</code> er riktig måte å lese den på."],["Linjene i <code>__init__</code> mangler <code>self.</code> foran variabelnavnet, så verdiene lagres ikke i objektet","ok"],["Klassen mangler en metode som heter <code>fornavn</code>","Vi trenger ikke en metode for å lagre en verdi. <code>fornavn</code> er en medlemsvariabel som settes i <code>__init__</code>."]],a:2,
+e:"Uten <code>self.</code> lagres verdien bare i en lokal variabel som forsvinner når <code>__init__</code> er ferdig. Riktig er <code>self.fornavn = fornavn</code> og <code>self.etternavn = etternavn</code>."},
+{q:"Feil i bruken av medlemsvariabler",code:"class Person:\n    def __init__(self, fornavn, etternavn):\n        self.fornavn = fornavn\n        self.etternavn = etternavn\n\np1 = Person(\"Ola\", \"Nordmann\")\nprint(fornavn)",err:"NameError: name 'fornavn' is not defined",
+o:[["Medlemsvariabelen tilhører objektet og må leses med objekt + punktum: <code>print(p1.fornavn)</code>","ok"],["Det mangler <code>self.</code> foran <code>fornavn</code> i <code>__init__</code>","<code>self.</code> står der allerede: <code>self.fornavn = fornavn</code>. Definisjonen i klassen er riktig, så feilen ligger i hvordan vi bruker variabelen."],["Objektet <code>p1</code> er ikke opprettet","<code>p1</code> opprettes på linjen over med <code>Person(...)</code>. Problemet er hvordan vi leser variabelen."],["Man må skrive <code>print(self.fornavn)</code>","<code>self</code> finnes bare inne i klassen. Utenfor klassen bruker vi navnet på objektet, altså <code>p1</code>."]],a:0,
+e:"Medlemsvariabler finnes inne i objektet, ikke som vanlige variabler. Utenfor klassen når vi dem med objekt + punktum: <code>p1.fornavn</code>."}
+];
+let S={cur:0,quiz:{},ex:{},pil:{},bug:{}};
+try{const r=localStorage.getItem("oop-s-del1");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+const save=()=>{try{localStorage.setItem("oop-s-del1",JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+function stats(){const q=Object.keys(S.quiz).filter(k=>S.quiz[k]).length,e=Object.keys(S.ex).filter(k=>S.ex[k]).length;const d=L.filter((_,i)=>S.quiz[i]&&S.ex[i]).length;
+$("xp").textContent=(q*10+e*30+(Object.keys(S.pil||{}).length+Object.keys(S.bug||{}).length)*5)+" XP";$("pc").textContent=d+" av "+L.length+" moduler";$("pb").style.width=(q+e)/(L.length*2)*100+"%";return d}
+function nav(){$("nav").innerHTML=L.map((m,i)=>`<button class="${i==S.cur?"on ":""}${S.quiz[i]&&S.ex[i]?"done":""}" onclick="go(${i})"><span class="dot">${S.quiz[i]&&S.ex[i]?"✓":i+1+OFF}</span>${m.t}</button>`).join("");stats()}
+function go(i){S.cur=i;save();render();window.scrollTo(0,0)}
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+function render(){const m=L[S.cur],i=S.cur;
+const intro=m.intro.trim().startsWith("<")?m.intro:`<p>${m.intro}</p>`;
+$("main").innerHTML=`<span class="tag">Modul ${i+1+OFF} av ${ALL.length}</span><h2>${m.t}</h2>
+<div class="card">${intro}<pre>${esc(m.code)}</pre>${m.note?`<p class="muted" style="margin:0 0 10px">${m.note}</p>`:""}<a href="https://pythontutor.com/visualize.html" target="_blank" rel="noopener">Visualiser koden i Python Tutor ↗</a></div>
+${m.extra||""}${PART===1&&i===0?pilHTML():""}
+<div class="card"><span class="tag">Quiz · 10 XP</span><h3>${m.q.q}</h3><div id="opts">${m.q.o.map((o,k)=>`<button class="opt" onclick="ans(${k})">${o}</button>`).join("")}</div><div id="qf"></div></div>
+${PART===1&&i===1?bugHTML():""}
+<div class="card"><span class="tag">Kodeoppgave · 30 XP</span><h3>${m.ex.task}</h3><textarea id="ta" spellcheck="false">${esc(m.ex.start)}</textarea>
+<button class="btn" onclick="chk()">Sjekk koden</button><button class="btn alt" onclick="sol()">Vis løsningsforslag</button><div id="ef"></div><div id="sl"></div>
+<p class="muted" style="font-size:13px">Sjekken leter etter de viktigste kodedelene. Test alltid koden din i VS Code også.</p></div>
+${m.after||""}
+<div>${i>0?`<button class="btn alt" onclick="go(${i-1})">← Forrige</button>`:""}${i<L.length-1?`<button class="btn" onclick="go(${i+1})">Neste modul →</button>`:`<p class="muted" style="margin:8px 0 0">Del 2 (Arv og Arbeidssted) kommer senere.</p>`}</div>`;
+if(S.quiz[i])ans(m.q.a,true);
+if(PART===1&&i===0)PIL.forEach((p,k)=>{if(S.pil&&S.pil[k])pilAns(k,p.a,true)});
+if(PART===1&&i===1)BUG.forEach((b,k)=>{if(S.bug&&S.bug[k])bugAns(k,b.a,true)});
+$("ta").addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target,s=t.selectionStart;t.value=t.value.slice(0,s)+"    "+t.value.slice(t.selectionEnd);t.selectionStart=t.selectionEnd=s+4}});
+nav()}
+function ans(k,quiet){const m=L[S.cur].q,b=document.querySelectorAll(".opt"),ok=k===m.a;
+b.forEach((x,j)=>{x.classList.toggle("ok",j===m.a&&(ok||quiet));if(j===k&&!ok)x.classList.add("no")});
+$("qf").innerHTML=ok?`<div class="fb ok">✅ Riktig! ${m.e}</div>`:`<div class="fb no">Ikke helt. Prøv igjen.</div>`;
+if(ok&&!S.quiz[S.cur]){S.quiz[S.cur]=1;save();nav()}}
+function chk(){const x=L[S.cur].ex,v=$("ta").value,miss=x.checks.filter(c=>!c[0].test(v));
+if(!miss.length){$("ef").innerHTML=`<div class="fb ok">🎉 Flott! Alle delene er på plass.</div>`;if(!S.ex[S.cur]){S.ex[S.cur]=1;save();nav()}}
+else $("ef").innerHTML=`<div class="fb no"><b>Nesten!</b> ${miss.map(c=>c[1]).join("<br>")}</div>`}
+function sol(){$("sl").innerHTML=`<pre>${esc(L[S.cur].ex.sol)}</pre>`}
+function pilHTML(){return `<div class="card"><span class="tag">Test deg selv · 5 XP per spørsmål</span><h3>Pilarene i OOP</h3>
+<p class="muted" style="margin-top:0">Bruk det du nettopp leste om innkapsling, arv og polymorfisme.</p>
+${PIL.map((p,k)=>`<div id="pq${k}"><h3 style="margin-top:20px">${k+1}. ${p.q}</h3>${p.o.map((o,j)=>`<button class="opt" onclick="pilAns(${k},${j})">${o}</button>`).join("")}<div id="pf${k}"></div></div>`).join("")}</div>`}
+function pilAns(k,j,quiet){const p=PIL[k],ok=j===p.a,b=document.querySelectorAll("#pq"+k+" .opt");
+b.forEach((x,n)=>{x.classList.remove("no");x.classList.toggle("ok",n===p.a&&(ok||!!quiet));if(n===j&&!ok)x.classList.add("no")});
+$("pf"+k).innerHTML=ok?`<div class="fb ok">✅ Riktig! ${p.e}</div>`:`<div class="fb no">Ikke helt. ${p.h}</div>`;
+if(ok&&!S.pil[k]){S.pil[k]=1;save();stats()}}
+function bugHTML(){return `<div class="card"><span class="tag">Finn feilen · 5 XP per spørsmål</span><h3>Hva er feil i koden?</h3>
+<p class="muted" style="margin-top:0">Koden under kjører ikke som den skal. Les koden og feilmeldingen, og velg forklaringen som stemmer.</p>
+${BUG.map((b,k)=>`<div id="bq${k}"><h3 style="margin-top:20px">${k+1}. ${b.q}</h3><pre style="margin-bottom:0">${esc(b.code)}</pre><pre style="margin-top:6px;color:var(--bad)">${esc(b.err)}</pre>${b.o.map((o,j)=>`<button class="opt" onclick="bugAns(${k},${j})">${o[0]}</button>`).join("")}<div id="bf${k}"></div></div>`).join("")}</div>`}
+function bugAns(k,j,quiet){const b=BUG[k],ok=j===b.a,btns=document.querySelectorAll("#bq"+k+" .opt");
+btns.forEach((x,n)=>{x.classList.remove("no");x.classList.toggle("ok",n===b.a&&(ok||!!quiet));if(n===j&&!ok)x.classList.add("no")});
+$("bf"+k).innerHTML=ok?`<div class="fb ok">✅ Riktig! ${b.e}</div>`:`<div class="fb no">Ikke helt. ${b.o[j][1]}</div>`;
+if(ok&&!S.bug[k]){S.bug[k]=1;save();stats()}}
+$("reset").onclick=()=>{if(confirm("Nullstille all fremdrift?")){S={cur:0,quiz:{},ex:{},pil:{},bug:{}};save();render()}};
+render();
+</script>
+</body>
+</html>
